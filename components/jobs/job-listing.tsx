@@ -1,11 +1,20 @@
 "use client";
 
-import { useInfiniteJobs } from "@/services/job-listing";
+import { useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
-import JobCardSkeleton from "../ui/job-card-skeleton";
-import { JobCard } from "./job-card";
 
-export function JobListing() {
+import { jobDataAtom } from "@/atoms/job-data";
+import { useInfiniteJobs } from "@/services/job-listing";
+import JobCardSkeleton from "../ui/job-card-skeleton";
+import JobCard from "./job-card";
+import { Job } from "@/types/jobs";
+import { useAtomValue } from "jotai";
+import { filteredJobsAtom } from "@/atoms/job-data";
+
+export default function JobListing() {
+
+  const setJobData = useSetAtom(jobDataAtom);
+  const filteredJobs = useAtomValue(filteredJobsAtom);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -18,6 +27,16 @@ export function JobListing() {
     error,
   } = useInfiniteJobs();
 
+  useEffect(() => {
+    if (!data) return;
+
+    console.log(data, "smaple data");
+
+    const allJobs: Job[] = data.pages.flatMap((page) => page.data);
+    setJobData(allJobs);
+  }, [data, setJobData]);
+
+  // Infinite scroll observer
   useEffect(() => {
     const el = loadMoreRef.current;
     if (!el || !hasNextPage) return;
@@ -39,12 +58,10 @@ export function JobListing() {
   if (status === "error")
     return <div className="text-red-500">{(error as Error).message}</div>;
 
-  const jobs = data?.pages.flatMap((page) => page.data) ?? [];
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-      {jobs.map((job) => (
-        <JobCard key={job.slug} job={job} />
+      {filteredJobs.map((job,index) => (
+        <JobCard key={`${job.slug}-${index}`} job={job} />
       ))}
 
       {hasNextPage && (

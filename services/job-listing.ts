@@ -2,8 +2,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { jobListingInstance } from "@/lib/axios";
 import { JobApiResponse } from "@/types/jobs";
 
-const JOBS_PAGE_SIZE = 10; // optional if your backend supports limit/offset
-
 async function fetchJobs({ pageParam = 1 }) {
   const res = (await jobListingInstance.get("/job-board-api", {
     params: {
@@ -15,7 +13,7 @@ async function fetchJobs({ pageParam = 1 }) {
 }
 
 export const useInfiniteJobs = () => {
-  return useInfiniteQuery<JobApiResponse[]>({
+  return useInfiniteQuery<JobApiResponse>({
     queryKey: ["job-postings"],
     queryFn: fetchJobs,
     getNextPageParam: (lastPage) => {

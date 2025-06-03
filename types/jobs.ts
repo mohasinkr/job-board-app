@@ -4,6 +4,7 @@ export interface Job {
   company_name: string;
   location: string;
   job_types: string[];
+  tags: string[];
   remote: boolean;
   description: string;
   url: string;
@@ -29,6 +30,6 @@ export interface JobApiLinks {
 
 export interface JobApiResponse {
   data: Job[];
-  links?: JobApiLinks;
-  meta?: JobApiMeta;
+  links: JobApiLinks;
+  meta: JobApiMeta;
 }
