@@ -19,8 +19,8 @@ interface JobDetailPageProps {
 export default function JobDetail({ job }: JobDetailPageProps) {
   return (
     <section className="max-w-5xl mx-auto py-8 px-4 space-y-6">
-      <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-gray-100">
-        <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+      <h1 className="text-2xl items-start font-bold flex gap-2 text-gray-900 dark:text-gray-100">
+        <Briefcase className="shrink-0 w-6 h-6 text-blue-600 dark:text-blue-400 mt-2" />
         {job.title}
       </h1>
       <p className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
