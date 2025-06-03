@@ -52,7 +52,7 @@ export default function JobListing() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [loadMoreRef.current, hasNextPage]);
+  }, [loadMoreRef.current, hasNextPage, fetchNextPage]);
 
   if (isPending) return <JobCardSkeleton />;
   if (status === "error")

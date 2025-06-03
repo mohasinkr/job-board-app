@@ -1,16 +1,18 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { jobListingInstance } from "@/lib/axios";
 import { JobApiResponse } from "@/types/jobs";
+import { QueryFunctionContext } from "@tanstack/react-query";
 
-async function fetchJobs({ pageParam = 1 }) {
-  const res = (await jobListingInstance.get("/job-board-api", {
+async function fetchJobs({ pageParam }: QueryFunctionContext): Promise<JobApiResponse> {
+  const res = await jobListingInstance.get<JobApiResponse>("/job-board-api", {
     params: {
-      page: pageParam,
+      page: pageParam ?? 1,
     },
-  })) as JobApiResponse;
+  });
 
-  return res;
+  return res.data;
 }
+
 
 export const useInfiniteJobs = () => {
   return useInfiniteQuery<JobApiResponse>({

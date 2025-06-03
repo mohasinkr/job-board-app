@@ -1,14 +1,15 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import type { Job } from "@/types/jobs";
 import ApplyJobForm from "./job-form";
+import JobDescription from "./job-description";
 
 interface JobDetailPageProps {
   job: Job;
@@ -33,10 +34,7 @@ export default function JobDetail({ job }: JobDetailPageProps) {
         ))}
       </div>
 
-      <div
-        className="prose prose-neutral max-w-none"
-        dangerouslySetInnerHTML={{ __html: job.description }}
-      />
+      <JobDescription description={job.description} />
 
       <Dialog>
         <DialogTrigger asChild>

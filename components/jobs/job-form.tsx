@@ -69,7 +69,7 @@ export default function ApplyJobForm() {
       toast.success("Application submitted successfully!", { id: toastId });
       form.reset();
     } catch (error: any) {
-      toast.error("Submission failed. Please try again.", { id: toastId });
+      toast.error("Submission failed. Please try again.");
     }
   }
 
