@@ -51,6 +51,19 @@ Example:
 
 ---
 
+---
+
+## ⚠️ Important Notes & Known Limitations
+
+* **Client-Side Operations:**
+    * **Search and Filtering:** The Arbeitnow API used for job listings does not natively support search or filtering parameters. Therefore, these functionalities have been implemented **client-side using Jotai** to manage the state of the filtered list.
+    * **Fetching Job by Slug/ID:** Similarly, fetching a single job by its slug or ID directly from the API is not supported. This logic is handled on the client-side by finding the job in the list fetched and stored in Jotai.
+    * **State Persistence on Refresh:** Consequently, if a user refreshes a job details page, the client-side Jotai state will be cleared. If the job list isn't re-fetched and the specific job isn't present in the initial client-side data, this could lead to a a 404 page.
+* **Job Description Rendering:**
+    * Job descriptions are fetched from the API and rendered **as-is**. Due to time constraints, rich text rendering (e.g., parsing Markdown) has **not** been implemented. This means descriptions might appear as raw HTML or plain text depending on the API response.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
