@@ -90,15 +90,11 @@ Example:
     ```plaintext
     # .env.local
 
-    # Example: API endpoint for job applications (if different from a generic webhook.site)
+    # Example: API endpoint for job applications
     NEXT_PUBLIC_APPLICATION_WEBHOOK_URL=[https://webhook.site/your-unique-webhook-id](https://webhook.site/your-unique-webhook-id)
 
-    # Example: Arbeitnow API endpoint (if you need to customize it, otherwise it might be hardcoded)
+    # Example: Arbeitnow API endpoint
     # NEXT_PUBLIC_ARBEITNOW_API_URL=[https://arbeitnow.com/api/job-board-api](https://arbeitnow.com/api/job-board-api)
-
-    # Add any other environment variables your project requires
-    ```
-    *Note: Ensure `NEXT_PUBLIC_` prefix is used for variables you want to expose to the browser.*
 
 ### Running the Development Server
 
